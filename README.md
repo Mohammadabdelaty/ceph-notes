@@ -6,7 +6,7 @@ All of the three types of storage provided by `ceph` are on top of LIBRADOS stor
 
 ![alt text](image.png)
 
-It has its monitoring component `ceph-mon`, manager `ceph-mgr`, and storage daemons `ceph-osd`
+It has its monitoring component `ceph-mon` (Compatible with prom and grafana), manager `ceph-mgr`, and storage daemons `ceph-osd`
 
 ## Arch
 App > LIBRADOS > RADOS Cluster
@@ -97,4 +97,47 @@ Image has headers (metadata), but it doesn't allocate storage until data is writ
 ### Journal RBD
 It write journals for all changes in the image
 ![alt text](image-12.png)
+
+### RBD Mirroring 
+![alt text](image-13.png)
+
+# CEPHFS: Ceph file system Like nfs
+
+It separates `metatadata` and `data` so both can expand independently.
+
+![alt text](image-14.png)
+
+It saves data in pool, and metadata (Directoried, and metadata journal)
+
+When you create a snapshot (from posix point of view), it only take action when change happen
+![alt text](image-15.png)
+
+It seems `rbytes`, only work with `cephfs`
+
+![alt text](image-16.png)
+
+### Features
+- subdir mounts
+- quota for dirs
+- Lazy I/O for HPC apps
+- mount -t ceph (kernel client)
+- Plugins for: CIFS (Samba), NFS, libcephfs library for apps.
+
+# Deploy
+- Rook > Kube
+- ceph-ansible > bare-metal
+- DeepSea
+
+
+
+
+
+
+
+
+
+
+
+
+
 
